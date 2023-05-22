@@ -3,7 +3,7 @@ const path = require('path');
 const notes = require('./routes/notes.js')
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.static('public'));
 
@@ -21,4 +21,4 @@ res.sendFile(path.join(__dirname, 'public/notes.html')));
 app.use('/api/notes',notes);
 
 app.listen(PORT, ()=>
-    console.log(`app is listening at http://localhost:${PORT}`));
+    console.log(`app is listening at http://localhost:${PORT} `));

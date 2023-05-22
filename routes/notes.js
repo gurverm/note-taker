@@ -1,13 +1,14 @@
 const notes = require("express").Router();
 // const writeFile = require('fs');
 const fs = require("fs");
+const { parse } = require("path");
 const { v4: uuidv4 } = require("uuid");
 // const { writeFile, readFile, appendFile } = require("fs");
 // let data = require("../db/db.json");
 
 const data = fs.readFileSync("./db/db.json", { encoding: "utf8" });
 // Display the file data
-console.log(data);
+// console.log(data);
 
 // parse stringified data into an object
 const parsedData = JSON.parse(data);
@@ -22,8 +23,13 @@ notes.post("/", (req, res) => {
 });
 
 notes.get("/", (req, res) => {
-  res.json(data);
+  res.json(parsedData);
   console.log("GET request recieved");
+});
+
+notes.delete("/:id", (req, res) => {
+    deleteData = parsedData.filter((note) => note.id !== req.params.id);    
+    res.json(deleteData);
 });
 
 module.exports = notes;
