@@ -11,7 +11,7 @@ const data = fs.readFileSync("./db/db.json", { encoding: "utf8" });
 // console.log(data);
 
 // parse stringified data into an object
-const parsedData = JSON.parse(data);
+let parsedData = JSON.parse(data);
 
 notes.post("/", (req, res) => {
   parsedData.push({ id: uuidv4(), ...req.body });
@@ -28,8 +28,11 @@ notes.get("/", (req, res) => {
 });
 
 notes.delete("/:id", (req, res) => {
-    deleteData = parsedData.filter((note) => note.id !== req.params.id);    
-    res.json(deleteData);
+  console.log("DELETE request recieved");
+  parsedData = parsedData.filter((note) => note.id !== req.params.id);
+  const updatedData = JSON.stringify(parsedData);
+  fs.writeFileSync("./db/db.json", updatedData, { encoding: "utf8" });
+  res.json(updatedData);
 });
 
 module.exports = notes;
