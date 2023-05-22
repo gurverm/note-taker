@@ -1,34 +1,25 @@
-const notes = require('express').Router();
-const writeFile = require('fs');
+const notes = require("express").Router();
+// const writeFile = require('fs');
+const {uuidv4} = require('uuidv4');
+let data = require("../db/db.json");
 
-const uuid = () => {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  };
+// const { v4: uuidv4 } = require('uuid');
 
-let data = require('../db/db.json');
-const { error } = require('console');
+const uuid = (newID) => {
+    newID.id = uuidv4();
+    return newID;
+}
 
-const updateDatabase = (data) => {
-    writeFile('./db/db.json', JSON.stringify(data),(error) =>{
-        if (error) console.info(error);
-    });
-};
-
-notes.get('/',(req, res) => {
-    res.json(data);
+notes.get("/", (req, res) => {
+  res.json(data);
+  console.log("GET request recieved");
 });
 
-notes.post('/',(req, res) => {
+notes.post('/', (req,res)=> {
     data.push(uuid(req.body));
-    updateDatabase(data);
-})
-
-notes.delete('/:id', (req,res)=>{
-    data = data.filter((note) => note.id !== req.params.id);
-    updateDatabase(data);
-    res.json(data);
+  // Log the response body to the console
+  console.log(req.body);
+    console.log('POST req recieved');
 })
 
 module.exports = notes;
