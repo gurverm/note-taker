@@ -16,17 +16,17 @@ This application uses an Express.js back end to save, retrieve and delete notes 
 N/A
 
 ## Usage
-Go to the deployed app here: 
-Click 'Get Started' to begin taking down notes.
+Go to the deployed app here: https://lit-hamlet-31003.herokuapp.com/ 
 
 ## Contributions
 N/A
 
 ## Tests
+Below is a demo of the deployed application.
 
+![DEMO](./images/note-taker.gif)
 
-![DEMO]()
-
+Demo video: https://drive.google.com/file/d/1MeamF5UT7e2WyWh4VOPEvzJRl1m_0_Bg/view 
 ## License
 This project is licensed under mit 
 https://opensource.org/licenses/MIT
